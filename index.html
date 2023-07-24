@@ -1,37 +1,351 @@
-<html>
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <title>FlowStorm, a Clojure and ClojureScript debugger with some uniq features</title>
-    <style>
-      body {
-          background-color: #222233;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          font-family: Arial, sans-serif;
-          color: magenta;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">    
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />    
+    <title>FlowStorm, a Clojure and ClojureScript debugger with some unique features</title>
+    <script>
+      var valuePropsExpanded=null;
+      function expandValueProp(propId) {
+        
+        if (propId==valuePropsExpanded) {
+          document.getElementById(propId).classList.add("collapse");
+          valuePropsExpanded=null;
+        } else {
+          let childs = document.querySelector("#value-props-details").children;
+          for(var i=0; i<childs.length; i++) {
+            let childId=childs[i].id;
+            if(propId==childId){            
+              childs[i].classList.remove("collapse");
+              valuePropsExpanded=propId;            
+            } else {            
+              childs[i].classList.add("collapse");            
+            }           
+          }
+        }               
       }
-      .main {          
-          margin-top: 20%;         
-      }
-      a {
-          text-decoration: none;
-          color: #ec93ec;
-      }
-    </style>
+    </script>
   </head>
   <body>
-    <div class="main">
-      <div><h2>FlowStorm, coming soon...</h2></div>
-      <div>
-        Checkout :
-        <ul>
-        <li><a href="https://github.com/jpmonettas/flow-storm-debugger">Github repo</a></li>
-        <li><a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html">User Guide</a></li>
-        </ul>
+    <div id="main">
+      
+      <nav role="navigation" class="navbar navbar-expand-sm">
+        <div class="container-fluid center-line">
+          
+          <div class="navbar-header nav">
+            <a class="navbar-brand" href="/"><span>FlowStorm</span></a>
+          </div>
+          <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-bar" aria-controls="#nav-bar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          
+          <div id="nav-bar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="nav-button"><a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_clojure">Get Started</a></li>
+              <li class="nav-button"><a href="https://github.com/jpmonettas/flow-storm-debugger#features">Features</a></li>
+              <li class="nav-button"><a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html">User Guide</a></li>
+              <li class="nav-button"><a href="https://github.com/jpmonettas/flow-storm-debugger#some-demo-videos-newers-at-the-top">Videos</a></li>
+              <li class="nav-button"><a href="https://github.com/jpmonettas/flow-storm-debugger#faq">FAQ</a></li>
+            </ul>
+          </div>
+          
+        </div>
+        
+      </nav>
+      
+      <div id="main-content">
+
+        <div id="jumbotron">
+          <div class="container-fluid">
+            <div class="row py-sm-5">
+              <div class="container center-line inner">
+                <div class="row">
+                  <div class="col-sm-7 order-sm-2">
+                    <img src="./imgs/jumbotron.png" class="img-fluid"/>
+                  </div>            
+                  <div class="col-sm-4 order-sm-1 text-center">
+                    <h2 class="header text-light">Much more than a debugger</h2>
+                    <button class="btn btn-primary"><a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_clojure">Get Started</a></button>
+                  </div>
+                </div>
+                
+                <div class="row pt-5">
+                  <div class="col-12 text-center text-light">
+                    <p>Designed to take your Clojure interactive programming to the next level.</p>
+                  </div>                  
+                </div>
+                
+              </div>              
+            </div>            
+          </div>          
+        </div>
+
+        
+        <div id="value-props" class="accordion container center-line">
+          <div class="row py-sm-3">
+            <div class="col-6 col-sm-4 col-md-2 value-props-btn"><div onclick="expandValueProp('val_prop_ide')" class="value text-center">IDE independent</div></div>
+            <div class="col-6 col-sm-4 col-md-2 value-props-btn"><div onclick="expandValueProp('val_prop_clj_cljs')" class="value text-center">Clojure & ClojureScript</div></div>
+            <div class="col-6 col-sm-4 col-md-2 value-props-btn"><div onclick="expandValueProp('val_prop_oss')" class="value text-center">Free & Open Source</div></div>
+            <div class="col-6 col-sm-4 col-md-2 value-props-btn"><div onclick="expandValueProp('val_prop_interactive')" class="value text-center">Designed for interactive programming</div></div>
+            <div class="col-6 col-sm-4 col-md-2 value-props-btn"><div onclick="expandValueProp('val_prop_multi_strategy')" class="value text-center">Multi strategy</div></div>
+            <div class="col-6 col-sm-4 col-md-2 value-props-btn"><div onclick="expandValueProp('val_prop_more_than_debugger')" class="value text-center">More than a debugger</div></div>
+          </div>
+          <div id="value-props-details" class="row">
+            <div id="val_prop_ide" class="collapse">
+              <p>
+                Have all the debugging power no matter what editor/IDE you choose.
+              </p>
+            </div>
+            <div id="val_prop_clj_cljs" class="collapse">
+              <p>
+                Whenever it can, FlowStorm tries hard to provide the same features for Clojure and ClojureScript.
+              </p>
+            </div>
+            <div id="val_prop_oss" class="collapse">
+              <p>
+                FlowStorm is and will always be free as in speech.
+              </p>
+            </div>
+            <div id="val_prop_interactive" class="collapse">
+              <p>
+                Clojure as most Lisps are designed from the ground to support interactive programming, so it is FlowStorm.
+              </p>              
+            </div>
+            <div id="val_prop_multi_strategy" class="collapse">
+              <p>
+                Every situation requires a different strategy. From stepping, trough printing, to scope capturing and repl poking, FlowStorm
+                tries to support all debugging strategies.
+              </p>              
+            </div>
+            <div id="val_prop_more_than_debugger" class="collapse">
+              <p>
+                Most of the provided tools are great for chasing bugs, but FlowStorm is designed not only as a debugger but as a development sidecar
+                to enhance your interactive programming experience.
+              </p>              
+            </div>
+          </div>
+        </div>          
+        
+
+        
+        <div id="features">          
+          <div class="container-fluid">
+            <div class="row">
+              <div class="container center-line feature">
+                <div class="row">
+                  <div class="feature-desc col-sm-4 order-sm-1">
+                    <h2><a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_clojurestorm">Automatic</a> instrumentation</h2>
+                    <p>
+                      Hit record and debug anything. No need to add breakpoints or modify your code.
+                    </p>
+                  </div>
+                  <div class="col-sm-7 order-sm-2">
+                    <img class="img-fluid" alt="" src="/imgs/automatic.gif"/>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+            <div class="row">
+              <div class="container center-line feature">
+                <div class="row">
+                  <div class="feature-desc col-sm-4 order-sm-2">
+                    <h2><a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_code_stepping">Step</a> freely through your code</h2>
+                    <p>
+                      Stepping over your code has never been easier.
+                      Travel through time by stepping backwards and forward or click around to help you understand complex scenarios.                      
+                    </p>
+                  </div>
+                  <div class="col-sm-7 order-sm-1">
+                    <img class="img-fluid" alt="" src="/imgs/stepping.gif"/>                
+                  </div>                          
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="container center-line feature">
+                <div class="row">
+                  <div class="feature-desc col-sm-7 order-sm-1">
+                    <h2>Explore you <a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_call_stack_tree_tool">call tree</a></h2>
+                    <p>
+                      Get a high level understanding of your execution by expanding and exploring the call tree.
+                      Need to go deeper? Just click and jump to that point in time.
+                    </p>
+                  </div>
+                  <div class="col-sm-5 order-sm-2">
+                    <img class="img-fluid" alt="" src="/imgs/call_tree.png"/>                
+                  </div>              
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="container center-line feature">
+                <div class="row">
+                  <div class="feature-desc col-sm-7 order-sm-2">
+                    <h2>Understand your <a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_functions_tool">functions</a></h2>
+                    <p>
+                      Get a high level view of your functions and how they are being called.
+                      Easily explore their arguments and return values.
+                      Need to go deeper? Just click and step through its code.
+                    </p>
+                  </div>
+                  <div class="col-sm-5 order-sm-1">
+                    <img class="img-fluid" alt="" src="/imgs/functions.png"/>                
+                  </div>              
+                </div>              
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="container center-line feature">
+                <div class="row">
+                  <div class="feature-desc col-sm-7 order-sm-1">
+                    <h2><a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_value_inspector">Inspect</a> your values</h2>
+                    <p>
+                      Clojure is data oriented. FlowStorm provides a powerful data inspection tool.
+                      Navigate freely into your data just by clicking around.
+                    </p>
+                  </div>
+                  <div class="col-sm-5 order-sm-2">
+                    <img class="img-fluid" alt="" src="/imgs/value_inspector.png"/>
+                  </div>            
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="container center-line feature">
+                <div class="row">
+                  <div class="feature-desc col-sm-7 order-sm-2">
+                    <h2>Take any value <a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_define_value_for_repl">back to your REPL</a></h2>
+                    <p>
+                      FlowStorm is designed for interactive programming. Any value you see in the UI can be
+                      made available to your REPL with a single click.
+                    </p>
+                  </div>
+                  <div class="col-sm-5 order-sm-1">
+                    <img class="img-fluid" alt="" src="/imgs/def_value.png"/>
+                  </div>            
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="container center-line feature">
+                <div class="row">
+                  <div class="feature-desc col-sm-7 order-sm-1">
+                    <h2>Multi-threading debugging with <a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_timeline_tool">the timeline</a></h2>
+                    <p>
+                      Render your entire executions timeline.
+                      Quickly understand how your threads instructions interleave.
+                    </p>
+                  </div>
+                  <div class="col-sm-5 order-sm-2">
+                    <img class="img-fluid" alt="" src="/imgs/timeline.png"/>
+                  </div>            
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="container center-line feature">
+                <div class="row">
+                  <div class="col-sm-7 order-sm-2 feature-desc">
+                    <h2>Next level <a href="https://jpmonettas.github.io/flow-storm-debugger/user_guide.html#_printer_tool">println debugging</a></h2>
+                    <p>
+                      For those cases where println is still the right choice, add, manage and visualize print instructions
+                      without re running your code.
+                    </p>
+                  </div>
+                  <div class="col-sm-5 order-sm-1">
+                    <img class="img-fluid" alt="" src="/imgs/printer.png"/>
+                  </div>            
+                </div>            
+              </div>            
+            </div>
+
+            <div class="row">
+              <div class="container center-line feature all-features">
+                <div class="row">
+                  <div class="col-sm-12 feature-desc">
+                    <h2>And much more! Check all the <a href="https://github.com/jpmonettas/flow-storm-debugger#features">features.</a></h2>                    
+                  </div>                  
+                </div>            
+              </div>            
+            </div>
+
+            <div class="row">
+              <div class="container center-line feature all-features integrations">
+                <div class="row">
+                  <div class="col-sm-12 feature-desc text-center">
+                    <h2>Editors integrations</h2>
+                    FlowStorm is and will always be editor/IDE independent but it can also be integrated into your editor of choice. Here are
+                    the currently supported integrations.
+                    <div class="container">
+                      <div class="row py-4">
+                        <div class="col-12 logo">
+                          <a href="https://github.com/jpmonettas/cider-storm"><img alt="" src="/imgs/emacs.svg"/></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                  
+                </div>            
+              </div>            
+            </div>
+
+          </div> <!-- container -->
+          
+        </div>  <!-- features -->
+        
+      </div> <!-- main-content -->
+    </div> <!-- main -->
+
+    <div id="footer">
+      <div class="container-fluid">
+        <div class="row py-sm-5">
+          <div class="container center-line inner">
+            <div class="row">
+                           
+              <!-- <div class="col-sm-7"> -->
+              <!--   <ul> -->
+              <!--     <li> -->
+              <!--       <iframe -->
+              <!--         src="https://ghbtns.com/github-btn.html?user=jpmonettas&amp;repo=flow-storm-debugger&amp;type=star&amp;count=true&amp;" -->
+              <!--         width=160 -->
+              <!--         height=30 -->
+              <!--         title="GitHub Stars" -->
+              <!--         /> -->
+              <!--     </li> -->
+              <!--   </ul>                 -->
+              <!-- </div> -->
+                          
+              <div class="col-sm-12">
+                <ul>
+                  <li class="links"><a href="https://github.com/jpmonettas/flow-storm-debugger">Github</a></li>
+                  <li class="links"><a href="https://clojurians.slack.com/archives/C03KZ3XT0CF">Support</a></li>
+                  <li class="links"><a href="https://github.com/sponsors/jpmonettas">Donate</a></li>
+                  <li class="links"><a href="https://raw.githubusercontent.com/jpmonettas/flow-storm-debugger/master/UNLICENSE">License</a></li>                  
+                </ul>
+              </div>
+              
+            </div>                
+            
+          </div>              
+        </div>            
       </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   </body>
 </html>
 
