@@ -1,1 +1,1 @@
-Landing page for https://github.com/jpmonettas/flow-storm-debugger
+Landing page for https://github.com/flow-storm/flow-storm-debugger
