@@ -1,6 +1,16 @@
+
+:root {
+    --nav-bar-bg: #323232;
+    --header-and-footer-bg: #232931;
+    --odd-rows-bg: #2f353b;
+    --even-rows-bg: #3f474f;
+    --text-color: white;    
+}
+
 * {
     font-family: "Segoe UI","Helvetica Neue","Helvetica",Arial,sans-serif;
     font-weight: 400;
+    color: var(--text-color);
 }
 
 ul {
@@ -11,8 +21,11 @@ a {
     text-decoration: none;    
 }
 
+body {
+    background-color: var(--even-rows-bg);
+}
 #features > div > .row:nth-child(odd) {
-    background: #d0d0e3;
+    background: var(--odd-rows-bg);
 }
 
 #value-props {
@@ -27,7 +40,7 @@ a {
     cursor: pointer;    
     height: 112px;
     width: 112px;
-    color: #323232;
+    
 }
 
 #value-props .value-props-btn {
@@ -36,17 +49,17 @@ a {
 }
 
 #value-props-details p {
-    color: grey;
+    color: #eba4e4;
     text-align: center;
 }
 
 #value-props .value:hover {
-    color: #9c0084;
+    color: #eba4e4;
 }
 
 #jumbotron .row {
     align-items: center;
-    background-color: #3f474f;
+    background-color: var(--header-and-footer-bg); 
 }
 
 #jumbotron h2 {
@@ -106,7 +119,7 @@ a {
 }
 
 nav.navbar {
-    background-color: #323232;    
+    background-color: var(--nav-bar-bg);    
 }
 
 nav.navbar .navbar-brand {
@@ -138,7 +151,7 @@ nav.navbar .navbar-brand {
 }
 
 #footer {
-    background-color: #3f474f
+    background-color: var(--header-and-footer-bg);
 }
 
 #footer a {
