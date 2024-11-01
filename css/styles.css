@@ -207,7 +207,7 @@ body {
 .feature img {
     border: 1px solid var(--feature-img-border-color);
     border-radius: 6px;
-    opacity: 0.7;
+    opacity: 0.8;
     box-shadow: 14px 14px 84px #000343;
 }
 
